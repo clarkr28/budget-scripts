@@ -29,8 +29,8 @@ function run() {
 	let moneyAccountedFor = 0.0;
 	let unreceivedIncome = 0.0;
 	let incomeLinesFound = 0;
-	const checking = parseFloat( prompt('checking account balance', '20126.78') );
-	const creditCard = parseFloat( prompt('credit card balance', '6104.46') );
+	const checking = parseFloat( prompt('checking account balance', '') );
+	const creditCard = parseFloat( prompt('credit card balance', '') );
 
 	document.querySelectorAll('.BudgetItemRow-content').forEach(node => {
 		const columns = node.getElementsByClassName('BudgetItemRow-column');
@@ -43,7 +43,7 @@ function run() {
 		// get the category Name
 		const labelNode = columns[0];
 		const isFund = labelNode.children.length === 2;
-		const categoryName = labelNode.children[isFund ? 1 : 0].getAttribute('data-text');
+		const categoryName = labelNode.children[isFund ? 1 : 0].children[0].getAttribute('data-text');
 
 		// get the remaining amount
 		const remainingNode = columns[columns.length-1];
@@ -78,7 +78,7 @@ function run() {
 
 	console.log(`\n\nchecking: ${checking}`);
 	console.log(`credit card: ${creditCard}`);
-	if (incomeLinesFound !== 3) {
+	if (incomeLinesFound !== 2) {
 		console.log(`WARNING: ${incomeLinesFound} income lines were found. 3 are expected.`);
 	}
 	console.log(`Money accounted for: ${moneyAccountedFor}`);
